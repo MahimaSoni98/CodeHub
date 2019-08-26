@@ -1,0 +1,66 @@
+/*Code is done without using algorithm*/
+
+#include<iostream>
+#include<stdlib.h>
+#include<time.h>
+#define size 10
+using namespace std;
+int main()
+{
+string text;
+char encrypt[size],decrypt[size];
+int i,ascii,Dascii;
+srand(time(NULL));     	 //random number
+int key=rand()%25+1;
+cout<<"ENTER KEY:";
+cin>>key;			//enter key and plaintext
+cout<<endl<<"ENTER PALINTEXT:";     
+cin>>text;
+int l=text.length();		//taken length of plaintext
+
+/*Encryption*/
+
+for( i=0;i<l;i++)				//loop till length of plaintext
+{	
+	text.at(i)=toupper(text.at(i));		// all chars converted to uppercase
+	ascii=int(text.at(i));			// converted char to ascii value
+	cout<<text.at(i);						
+	ascii=ascii+key;			// key added in ascii value	
+	if(ascii>90)			// if greater then substract 26
+	{
+	    ascii=ascii-26;	
+	}
+	encrypt[i]=ascii;     
+
+}
+	
+cout<<endl<<endl;
+cout<<"CIPHERTEXT:";
+for(i=0;i<l;i++)
+{
+     cout<<encrypt[i];  //print encripted chars
+}	
+
+
+/*Decryption*/
+
+for( i=0;i<l;i++)
+{
+   Dascii=int(encrypt[i]);  //moved encripted ascii values in var
+   Dascii=Dascii+26;	     //add 26 and sub from key
+    Dascii=Dascii-key;	
+    if(Dascii>90)	   //if greater then 90 ,substract 26
+    {
+	Dascii=Dascii-26;					
+     }
+   decrypt[i]=Dascii;     
+}
+
+cout<<endl<<endl<<"PLAINTEXT:";
+for(i=0;i<l;i++)
+	{
+	cout<<decrypt[i];     			// decrypted chars
+	}	
+	
+cout<<endl<<endl<<"Key:"<<key;		// print key
+}
